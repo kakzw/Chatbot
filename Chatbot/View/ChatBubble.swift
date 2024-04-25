@@ -24,6 +24,7 @@ struct ChatBubble<Content>: View where Content: View {
         Spacer()
       }
       content()
+        .padding(direction == .left ? .leading : .trailing, 8)
         .foregroundColor(direction == .left ? .black : .white)
         .background(direction == .left ? Color.secondary.opacity(0.2) : .orange)
         .clipShape(ChatBubbleShape(direction: direction))

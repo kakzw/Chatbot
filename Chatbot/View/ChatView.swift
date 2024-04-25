@@ -6,16 +6,21 @@
 //
 
 import SwiftUI
+import CoreData
 
 // MARK: - ChatView
 
 struct ChatView: View {
+  @Environment(\.managedObjectContext) var managedObjContext
+  
   @ObservedObject var viewModel = ChatViewModel()
+  
+  @State private var showSidebar = false
   
   var body: some View {
     ZStack {
       VStack {
-        TitleTextView()
+        TitleTextView(context: managedObjContext, viewModel: viewModel, showSideBar: $showSidebar)
         
         // display all the messages from user and response
         ScrollViewReader { proxy in
@@ -32,12 +37,19 @@ struct ChatView: View {
             // display latest message
             proxy.scrollTo(newId, anchor: .bottom)
           }
-          
-          TextFieldView(viewModel: viewModel)
         }
         .padding()
+        
+        Spacer()
+        
+        TextFieldView(context: managedObjContext, viewModel: viewModel)
+          .padding()
       }
       .font(.title3)
+      
+      Sidebar(isShowing: $showSidebar, direction: .leading) {
+        SidebarContentView(context: managedObjContext, viewModel: viewModel, showSidebar: $showSidebar)
+      }
       
       // display loading view while getting response from API
       if viewModel.isLoading {
@@ -45,21 +57,24 @@ struct ChatView: View {
       }
     }
   }
-  
-  // message that user typed and response from ChatGPT
-  private func messageView(message: Message) -> some View {
-    // display on right for user message
-    // display on left for response message
-    ChatBubble(direction: message.role == .user ? .right : .left, content: {
-      Text(message.content)
-        .padding(12)
-    })
-  }
 }
+
+// message that user typed and response from ChatGPT
+private func messageView(message: Message) -> some View {
+  // display on right for user message
+  // display on left for response message
+  ChatBubble(direction: message.role == .user ? .right : .left, content: {
+    Text(message.content)
+      .padding(12)
+  })
+}
+
 
 // MARK: - TextFieldView
 
 struct TextFieldView: View {
+  var context: NSManagedObjectContext
+  
   @ObservedObject var viewModel: ChatViewModel
   
   var body: some View {
@@ -69,7 +84,7 @@ struct TextFieldView: View {
           // when the user hit enter
           // send currently entered message
           if viewModel.currentInput != "" {
-            viewModel.sendMessage()
+            viewModel.sendMessage(context: context)
           }
         }
       
@@ -89,7 +104,7 @@ struct TextFieldView: View {
       // button to send message
       Button(action: {
         // sends currently entered message
-        viewModel.sendMessage()
+        viewModel.sendMessage(context: context)
       }, label: {
         Image(systemName: "paperplane.fill")
       })
@@ -135,23 +150,52 @@ struct LoadingView: View {
 // MARK: - TitleTextView
 
 struct TitleTextView: View {
+  var context: NSManagedObjectContext
+  
+  @ObservedObject var viewModel: ChatViewModel
+  @Binding var showSideBar: Bool
+  
   var body: some View {
     ZStack {
-        Rectangle()
-            .fill(Color.orange)
-            .edgesIgnoringSafeArea(.top)
+      Rectangle()
+        .fill(Color.orange)
+        .edgesIgnoringSafeArea(.top)
+      
+      HStack {
+        Button {
+          showSideBar = true
+        } label: {
+          Image(systemName: "clock")
+        }
+        .padding(.leading)
+        .bold()
+        .foregroundStyle(Color.white)
+        
+        Spacer()
         
         Text("Chatbot")
-            .font(.largeTitle)
-            .bold()
-            .foregroundStyle(Color.white)
-            .padding(.top, 20)
-            .padding(.bottom, 10)
+          .font(.largeTitle)
+          .bold()
+          .foregroundStyle(Color.white)
+          .padding(.top, 20)
+          .padding(.bottom, 10)
+        
+        Spacer()
+        
+        Button {
+          viewModel.newChat(context: context)
+        } label: {
+          Image(systemName: "square.and.pencil")
+        }
+        .padding(.trailing)
+        .bold()
+        .foregroundStyle(Color.white)
+      }
     }
     .frame(maxHeight: 30)
   }
 }
 
-#Preview {
-  ChatView()
-}
+//#Preview {
+//  ChatView()
+//}

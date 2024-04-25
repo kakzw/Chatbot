@@ -19,6 +19,10 @@
 		CF7166F32BD9B0340019BA67 /* OpenAIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7166F22BD9B0340019BA67 /* OpenAIService.swift */; };
 		CF7166F62BD9B2400019BA67 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF7166F52BD9B2400019BA67 /* ChatViewModel.swift */; };
 		CF7166FD2BD9B3480019BA67 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CF7166FC2BD9B3480019BA67 /* Alamofire */; };
+		CFF287BC2BD9F36400BD2D6D /* ChatbotModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF287BB2BD9F36400BD2D6D /* ChatbotModel.swift */; };
+		CFF287BF2BD9F37F00BD2D6D /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CFF287BD2BD9F37F00BD2D6D /* DataModel.xcdatamodeld */; };
+		CFF287C12BD9F38800BD2D6D /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF287C02BD9F38800BD2D6D /* DataController.swift */; };
+		CFF287C32BD9F3F800BD2D6D /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF287C22BD9F3F800BD2D6D /* Sidebar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,10 @@
 		CF7166F02BD9AFF40019BA67 /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
 		CF7166F22BD9B0340019BA67 /* OpenAIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIService.swift; sourceTree = "<group>"; };
 		CF7166F52BD9B2400019BA67 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		CFF287BB2BD9F36400BD2D6D /* ChatbotModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatbotModel.swift; sourceTree = "<group>"; };
+		CFF287BE2BD9F37F00BD2D6D /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		CFF287C02BD9F38800BD2D6D /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		CFF287C22BD9F3F800BD2D6D /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,11 +114,9 @@
 			isa = PBXGroup;
 			children = (
 				CF7166C22BD9A74C0019BA67 /* ChatbotApp.swift */,
-				CF7166C42BD9A74C0019BA67 /* ChatView.swift */,
-				CF7166F52BD9B2400019BA67 /* ChatViewModel.swift */,
-				CF7166F22BD9B0340019BA67 /* OpenAIService.swift */,
-				CF7166F02BD9AFF40019BA67 /* ChatBubble.swift */,
-				CF7166EE2BD9AFC80019BA67 /* Constants.swift */,
+				CFF287B82BD9F31800BD2D6D /* Model */,
+				CFF287B92BD9F31E00BD2D6D /* View */,
+				CFF287BA2BD9F32A00BD2D6D /* DataModel */,
 				CF7166C62BD9A74D0019BA67 /* Assets.xcassets */,
 				CF7166C82BD9A74D0019BA67 /* Preview Content */,
 			);
@@ -147,6 +153,36 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CFF287B82BD9F31800BD2D6D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CFF287BB2BD9F36400BD2D6D /* ChatbotModel.swift */,
+				CF7166F22BD9B0340019BA67 /* OpenAIService.swift */,
+				CF7166EE2BD9AFC80019BA67 /* Constants.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CFF287B92BD9F31E00BD2D6D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CF7166C42BD9A74C0019BA67 /* ChatView.swift */,
+				CF7166F52BD9B2400019BA67 /* ChatViewModel.swift */,
+				CF7166F02BD9AFF40019BA67 /* ChatBubble.swift */,
+				CFF287C22BD9F3F800BD2D6D /* Sidebar.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CFF287BA2BD9F32A00BD2D6D /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				CFF287BD2BD9F37F00BD2D6D /* DataModel.xcdatamodeld */,
+				CFF287C02BD9F38800BD2D6D /* DataController.swift */,
+			);
+			path = DataModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,8 +321,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFF287C32BD9F3F800BD2D6D /* Sidebar.swift in Sources */,
 				CF7166F62BD9B2400019BA67 /* ChatViewModel.swift in Sources */,
+				CFF287BF2BD9F37F00BD2D6D /* DataModel.xcdatamodeld in Sources */,
+				CFF287BC2BD9F36400BD2D6D /* ChatbotModel.swift in Sources */,
 				CF7166F12BD9AFF40019BA67 /* ChatBubble.swift in Sources */,
+				CFF287C12BD9F38800BD2D6D /* DataController.swift in Sources */,
 				CF7166C52BD9A74C0019BA67 /* ChatView.swift in Sources */,
 				CF7166C32BD9A74C0019BA67 /* ChatbotApp.swift in Sources */,
 				CF7166EF2BD9AFC80019BA67 /* Constants.swift in Sources */,
@@ -633,6 +673,20 @@
 			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		CFF287BD2BD9F37F00BD2D6D /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CFF287BE2BD9F37F00BD2D6D /* DataModel.xcdatamodel */,
+			);
+			currentVersion = CFF287BE2BD9F37F00BD2D6D /* DataModel.xcdatamodel */;
+			name = DataModel.xcdatamodeld;
+			path = "/Users/kakzw/Library/CloudStorage/OneDrive-Personal/2024 Spring/Artificial Intelligence/Assignment/Chatbot/Chatbot/DataModel/DataModel.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CF7166B72BD9A74C0019BA67 /* Project object */;
 }
